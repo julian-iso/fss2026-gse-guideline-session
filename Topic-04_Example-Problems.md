@@ -11,9 +11,41 @@
 
 ## 1. Example Problems
 
-> **Note:** These are small, manageable problems that the class can solve using the guidelines. Each problem should take 5-15 minutes to complete. Include 2-4 problems total.
-
 ### Problem 01: Test Generation
+
+**Task Description:**  
+A friend of yours is building a new app and just finished the password validation logic. He’s a great developer but admits he isn't very experienced in "breaking" code or finding edge cases. He’s worried that a user might bypass his rules or that the app might crash if someone enters something unexpected.
+
+He asks you for your help. Use an LLM to analyze his algorithm and generate tests that attempt to bypass the validation or trigger errors.  
+
+**Starter Artefacts:**  
+You can find the artifacts [here](https://github.com/julian-iso/fss2026-gse-guideline-session/blob/main/Problem-01_Test-Generation.py).
+
+**Guidelines to Apply:**  
+> List the specific guidelines from your guideline package that students should try applying to this problem.
+
+**Time Estimate:** approx. 15 min
+
+---
+
+### Problem 02: Test Validation
+
+**Task Description:**  
+Your friend is grateful for your help! He has now written his own suite of pytest cases to feel more confident. However, he was in a rush and thinks some of his tests might be "buggy" or useless.
+
+Your task is to use an LLM to perform a review of his tests and identify the imposters.
+
+**Starter Artefacts:**  
+You can find the artifacts [here](https://github.com/julian-iso/fss2026-gse-guideline-session/blob/main/Problem-02_Test-Validation.py).
+
+**Guidelines to Apply:**  
+> List the specific guidelines from your guideline package that students should try applying to this problem.
+
+**Time Estimate:** approx. 15 min
+
+---
+
+### Problem A_N: `[Title]`
 
 **Task Description:**  
 Describe the task clearly. What should the solution accomplish?
@@ -27,7 +59,9 @@ Describe the task clearly. What should the solution accomplish?
 **Guidelines to Apply:**  
 List the specific guidelines from your guideline package that students should try applying to this problem.
 
-**Time Estimate:** approx. 15 min
+**Time Estimate:** `[e.g., 10 minutes]`
+
+---
 
 ### Problem A_N: `[Title]`
 
