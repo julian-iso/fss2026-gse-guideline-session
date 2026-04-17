@@ -25,9 +25,9 @@ You'll find out for yourself.
 | `Topic-04_Guidelines.md` | Our testing guidelines — the core artifact of this session |
 | `Topic-04_Example-Problems.md` | Three hands-on problems to practice with |
 | `Topic-04_Evaluation.md` | Evaluation criteria and model solutions to assess your work |
-| `Problem 01 - Test Generation/` | Starter code for Problem 01 |
-| `problem_02_test_validation.py` | Starter tests for Problem 02 |
-| `problem_03_test_objective.py` | Starter code for Problem 03 |
+| `problems/01_test-generation/` | Starter code + model solution for Problem 01 |
+| `problems/02_test-validation/` | Starter test suite for Problem 02 |
+| `problems/03_test-objective/` | Starter code for Problem 03 |
 
 ---
 
@@ -61,7 +61,7 @@ Repeat the same problem, but this time apply the relevant guidelines from `Topic
 
 A friend built a **password validator** and wants you to stress-test it using an LLM. Your job is to generate tests that uncover edge cases and potential crashes.
 
-> Starter code: [`Problem 01 - Test Generation/problem_01_test_generation.py`](./Problem%2001%20-%20Test%20Generation/problem_01_test_generation.py)
+> Starter code: [`problems/01_test-generation/validate_password.py`](./problems/01_test-generation/validate_password.py)
 
 The validator enforces these rules:
 - Length between **8 and 20** characters
@@ -75,7 +75,7 @@ The validator enforces these rules:
 
 Your friend wrote his own pytest suite — but he was in a rush and suspects some tests are buggy or useless. Use an LLM to **review** the tests and flag the imposters.
 
-> Starter tests: [`problem_02_test_validation.py`](./problem_02_test_validation.py)
+> Starter tests: [`problems/02_test-validation/test_starter.py`](./problems/02_test-validation/test_starter.py)
 
 Look out for: missing assertions, misleading test names, tests that always pass, and poor isolation.
 
@@ -85,7 +85,7 @@ Look out for: missing assertions, misleading test names, tests that always pass,
 
 A `UserLogin` class introduces a subtle bug: the `login` method strips whitespace from the **input** before comparing it to the **stored** password (which may itself contain whitespace). Your task is to use an LLM to expose this flaw — and discover how much context you give the LLM matters.
 
-> Starter code: [`problem_03_test_objective.py`](./problem_03_test_objective.py)
+> Starter code: [`problems/03_test-objective/user_login.py`](./problems/03_test-objective/user_login.py)
 
 Try prompting the LLM with only the `validate_password` method first, then with the full class. Compare the results.
 

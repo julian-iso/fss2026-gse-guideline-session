@@ -46,7 +46,7 @@ Ideally, a strong solution meets all defined evaluation criteria. However, for t
 - **Test Case 5 (Edge Case):** "A1bcdefghijklmnopqrst" → False
 
 **Correct Solution Code:**  
-You can find the solution [here](https://github.com/julian-iso/fss2026-gse-guideline-session/blob/main/Problem-01_Test-Generation.py).
+You can find the solution [here](./problems/01_test-generation/test_solution.py).
 
 **Common Mistakes to Avoid:**  
 - **No Invalid-Type Coverage:** Skipping inputs like None or numbers and not verifying whether the function returns False or raises an error.
@@ -68,7 +68,7 @@ The main goal is to correctly distinguish meaningful tests from **misleading or 
 - **Test Case 5 (Edge Case):** Review `test_password_valid` → **Expected Output:** Flagged as unreliable as the test only returns the output of the function and doesn't compare it to an assertion.
 
 **Correct Solution Code:**  
-You can find the starter tests to review [here](https://github.com/julian-iso/fss2026-gse-guideline-session/blob/main/Problem-02_Test-Validation.py).
+You can find the starter tests to review [here](./problems/02_test-validation/test_starter.py).
 
 **Common Mistakes to Avoid:**  
 - **Ignoring Assertion Quality:** Accepting tests with `assert True` or missing assertions as valid.
@@ -87,7 +87,7 @@ In this problem, the key objective is to identify the login flaw introduced by a
 - **Test Case 2:** `UserLogin("user", "Abcd1234 ").login("Abcd1234 ")` → **Expected Output:** `"❌ Login Failed!"` (reveals inconsistent behavior because the stored password keeps trailing whitespace, but input is stripped before comparison).
 
 **Correct Solution Code:**  
-You can find the starter code [here](https://github.com/julian-iso/fss2026-gse-guideline-session/blob/main/problem_03_test_objective.py).
+You can find the starter code [here](./problems/03_test-objective/user_login.py).
 
 **Common Mistakes to Avoid:**  
 - **Providing Too Little Context:** Sharing only `validate_password` or only login with the LLM, so the `strip()` side effect in the full class is missed.

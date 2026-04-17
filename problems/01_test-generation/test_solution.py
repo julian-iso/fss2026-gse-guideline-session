@@ -1,6 +1,6 @@
 import pytest
 
-from problem_01_test_generation import validate_password
+from validate_password import validate_password
 
 
 @pytest.mark.parametrize(

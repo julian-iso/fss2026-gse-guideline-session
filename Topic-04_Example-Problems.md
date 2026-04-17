@@ -19,7 +19,7 @@ A friend of yours is building a new app and just finished the password validatio
 He asks you for your help. Use an LLM to analyze his algorithm and generate tests that attempt to bypass the validation or trigger errors.  
 
 **Starter Artefacts:**  
-You can find the artifacts [here](https://github.com/julian-iso/fss2026-gse-guideline-session/blob/main/Problem-01_Test-Generation.py).
+You can find the artifacts [here](./problems/01_test-generation/validate_password.py).
 
 **Guidelines to Apply:**  
 > List the specific guidelines from your guideline package that students should try applying to this problem.
@@ -36,7 +36,7 @@ Your friend is grateful for your help! He has now written his own suite of pytes
 Your task is to use an LLM to perform a review of his tests and identify the imposters.
 
 **Starter Artefacts:**  
-You can find the artifacts [here](https://github.com/julian-iso/fss2026-gse-guideline-session/blob/main/Problem-02_Test-Validation.py).
+You can find the artifacts [here](./problems/02_test-validation/test_starter.py).
 
 **Guidelines to Apply:**  
 > List the specific guidelines from your guideline package that students should try applying to this problem.

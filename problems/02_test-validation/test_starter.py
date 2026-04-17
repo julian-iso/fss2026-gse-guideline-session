@@ -1,4 +1,4 @@
-from problem_01_test_generation import validate_password
+from validate_password import validate_password
 
 def test_missing_uppercase():
     validate_password("alllowercase1")
