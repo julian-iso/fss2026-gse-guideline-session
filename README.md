@@ -2,7 +2,7 @@
 
 **Team:** The Testing Team  
 **Authors:** Julian Maurus, Sebastian Menzel, Simon Wally  
-**Date:** 22 April 2026
+**Submission Date:** 22.04.2026
 
 ## 👋 Welcome
 
