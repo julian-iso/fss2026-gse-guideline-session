@@ -117,7 +117,7 @@ Output format:
 ```
 
 **When to Apply:**  
-- Test generation tasks where the target behavior, framework, and output format are already defined
+- Test generation tasks where the target behavior, framework and output format are already defined
 - Tasks that require consistent and executable results
 - Prompts that need a clear structure, stable formatting or a reusable template
 - Tasks where a few-shot example or smaller prompt batches improve reliability
