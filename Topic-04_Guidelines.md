@@ -64,7 +64,7 @@ Use clear, structured prompts to express an already-defined testing objective an
     Example: “Act as a senior test engineer.” For larger suites, role assignment should encourage categorical organization.
 
 2. **Provide focused context and input data**  
-    Include the Class Under Test (or relevant method), key dependencies, relevant code snippets, and test scenarios that support the defined objective.
+    Include the Class Under Test (or relevant method), key dependencies, relevant code snippets and test scenarios that support the defined objective.
 
 3. **Define task instructions, constraints and output format**  
     State exactly what the model should do, what to prioritize and which artifact is expected. Also specify framework/assertion style, required edge cases, non-goals, naming conventions and exact structure. Add examples when format consistency is required.
