@@ -12,19 +12,19 @@
 ### Guideline 01: Define the Testing Objective
 
 **Description:**  
-Define the test target, scope boundaries, and success criteria before writing prompts or tests. Use three concrete inputs:
+Define the test target, scope boundaries and success criteria before writing prompts or tests. Use three concrete inputs:
 
 1. **Identify the Testing Objective and Expected Artifact**  
-    Clearly specify what testing goal you want to achieve (e.g., generating test cases for a specific feature, analyzing logs, or validating code behavior) and which artifact you expect as output (e.g., test file, test report, test data). Name the exact target function/module and, when known, the intended scenario set.
+    Clearly specify what testing goal you want to achieve (e.g., generating test cases for a specific feature, analyzing logs, or validating code behavior) and which artifact you expect as output (e.g., test file, test report, test data). Name the exact target function/module and when known the intended scenario set.
 
 2. **Establish Scope Boundaries**  
-    Define the scope explicitly by identifying which functions/features are in scope and which are out of scope. Articulate negative paths, edge cases, and boundary conditions you want to cover. For security-critical targets, explicitly include required security scenarios (e.g., enumeration resistance, timing-awareness checks).
+    Define the scope explicitly by identifying which functions/features are in scope and which are out of scope. Articulate negative paths, edge cases and boundary conditions you want to cover. For security-critical targets, explicitly include required security scenarios (e.g., enumeration resistance, timing-awareness checks).
 
 3. **Anchor Success Criteria**  
     Ground success criteria in concrete, verifiable sources: acceptance criteria from user stories, requirement documents, real-world examples and past test data. Define measurable quality constraints (e.g., mutation score targets) and required technical practices (e.g., parametrization, dependency mocking, documentation quality) to reduce redundancy and improve maintainability.
 
 **Reasoning:**  
-This guideline is foundational because a clearly defined testing objective prevents misalignment between stakeholder expectations and LLM outputs. Identifying the specific testing objective and expected artifact ensures the LLM understands context and generates relevant outputs (see Guideline 01.A). Analyzing software requirements to explicitly identify testing objectives, scope boundaries, and success criteria establishes the foundational target required for the entire testing lifecycle (see Guideline 01.B). Creating a formal test plan that outlines the testing strategy and specific test objectives clarifies the target before test design, ensuring that subsequent test generation aligns with software goals (see Guideline 01.C). Grounding success criteria in structured project documentation-such as user stories, requirement documents, acceptance criteria, and real-world examples-ensures the testing objective is concrete and verifiable (see Guideline 01.F; see Guideline 01.H). Establishing explicit scope boundaries by identifying edge cases, negative paths, and boundary conditions prevents ambiguous or incomplete test coverage (see Guideline 01.G). LLM experimentation further shows that explicitly enumerating scenarios sharply reduces scope creep while increasing scenario completeness (see Guideline 01.I), and that security-focused checks in sensitive domains are only reliably generated when requested directly in the objective (see Guideline 01.J). It also demonstrates that embedding technical practices in the objective (e.g., parametrization and mocking) improves maintainability and reduces redundant tests (see Guideline 01.K). Employing mutation testing as a success criterion optimizes test evaluation-while code coverage is a useful metric, its correlation with actual bug detection is weak; mutation testing ensures tests fulfill the primary objective of detecting faults (see Guideline 01.D).
+This guideline is foundational because a clearly defined testing objective prevents misalignment between stakeholder expectations and LLM outputs. Identifying the specific testing objective and expected artifact ensures the LLM understands context and generates relevant outputs (see Guideline 01.A). Analyzing software requirements to explicitly identify testing objectives, scope boundaries and success criteria establishes the foundational target required for the entire testing lifecycle (see Guideline 01.B). Creating a formal test plan that outlines the testing strategy and specific test objectives clarifies the target before test design, ensuring that subsequent test generation aligns with software goals (see Guideline 01.C). Grounding success criteria in structured project documentation-such as user stories, requirement documents, acceptance criteria and real-world examples-ensures the testing objective is concrete and verifiable (see Guideline 01.F; see Guideline 01.H). Establishing explicit scope boundaries by identifying edge cases, negative paths and boundary conditions prevents ambiguous or incomplete test coverage (see Guideline 01.G). LLM experimentation further shows that explicitly enumerating scenarios sharply reduces scope creep while increasing scenario completeness (see Guideline 01.I) and that security-focused checks in sensitive domains are only reliably generated when requested directly in the objective (see Guideline 01.J). It also demonstrates that embedding technical practices in the objective (e.g., parametrization and mocking) improves maintainability and reduces redundant tests (see Guideline 01.K). Employing mutation testing as a success criterion optimizes test evaluation-while code coverage is a useful metric, its correlation with actual bug detection is weak; mutation testing ensures tests fulfill the primary objective of detecting faults (see Guideline 01.D).
 
 **Example:**  
 ```
@@ -60,40 +60,33 @@ Edge Cases:
 
 **Description:**  
 Use clear, structured prompts to express an already-defined testing objective and keep the prompt as simple as the task allows. Apply this sequence:
-
 1. **Set the role clearly**  
-    Example: “Act as a senior test engineer.” For larger suites, role assignment should also encourage categorical test organization (e.g., happy path, security, validation sections).
+    Example: “Act as a senior test engineer.” For larger suites, role assignment should encourage categorical organization.
 
 2. **Provide focused context and input data**  
-    Include the Class Under Test (or relevant method), plus key dependencies, relevant code snippets, and test scenarios that support the defined objective.
+    Include the Class Under Test (or relevant method), key dependencies, relevant code snippets, and test scenarios that support the defined objective.
 
-3. **State the instructions clearly**  
-    Tell the model exactly what to do, which task to prioritize, and which output artifact you want.
+3. **Define task instructions, constraints and output format**  
+    State exactly what the model should do, what to prioritize and which artifact is expected. Also specify framework/assertion style, required edge cases, non-goals, naming conventions and exact structure. Add examples when format consistency is required.
 
-4. **Specify constraints and non-goals**  
-    State framework, assertion style, required edge cases, and anything that should not be included.
+4. **Choose the simplest prompting style that fits the task**  
+    Start with **zero-shot** for simple tasks. Use **few-shot** when format consistency or domain-specific behavior is needed. For reasoning-heavy tasks, consider **Chain-of-Thought (CoT)** and verify outputs carefully. For narrow requests, a short instruction-light prompt can be sufficient.
 
-5. **Define the output format and add examples when needed**  
-    Require exact structure, naming conventions, and expected artifacts. Use examples or **few-shot** prompts when format consistency or domain-specific behavior is needed.
+5. **Separate system-level and task-level instructions when helpful**  
+    Put stable behavior/persona rules in the system prompt and task-specific requests in the user prompt when persistent behavior is needed.
 
-6. **Choose the simplest prompting style that fits the task**  
-    Start with **zero-shot** for simple tasks. For more complex, reasoning-heavy tasks, consider **Chain-of-Thought (CoT)** prompting to encourage step-by-step analysis, but verify the output carefully before use. For very narrow and well-defined requests, a short instruction-light prompt can still be acceptable.
-
-7. **Separate system-level and task-level instructions when helpful**  
-    Put stable behavior or persona rules in the system prompt and keep the task-specific request in the user prompt when the workflow needs persistent behavior.
-
-8. **Batch large tasks**  
+6. **Batch large tasks**  
     Split complex or multi-objective requests into smaller prompt batches instead of one overloaded prompt.
 
-9. **Use targeted failure context for debugging tasks**  
-    When the goal is bug localization or repair, include only the relevant traceback/error message and the failing snippet instead of full logs.
+7. **Use targeted failure context for debugging tasks**  
+    For bug localization or repair, include only the relevant traceback/error message and failing snippet instead of full logs.
 
-10. **Use multimodal or graph context only when the task truly benefits from it**  
-    Add diagrams, UI screenshots, or graph representations for structurally complex scenarios (e.g., GUI flows or coverage relationships), and keep these additions focused.
+8. **Use multimodal or graph context only when it adds value**  
+    Add diagrams, UI screenshots, or graph representations only for structurally complex scenarios and keep them focused.
 
 
 **Reasoning:**  
-This guideline is important because prompt structure directly influences whether generated tests are relevant, executable, and consistent: defining role, context, instructions, constraints, and output format reduces ambiguity and aligns outputs with the intended testing artifact (see Guideline 02.K). Clear and specific task framing also reduces generic or off-target outputs (see Guideline 02.R). Starting with simple prompting improves robustness for compilable code generation (see Guideline 02.G), while few-shot examples should be added when output consistency or format control is required (see Guideline 02.B). Role assignment improves perspective and focus during testing tasks (see Guideline 02.C), and experimentation additionally shows it can improve organization and navigability by producing clearer category-based test structures (see Guideline 02.T). Separating stable system behavior from task-specific user requests supports more predictable responses across iterations (see Guideline 02.M). Context quality is equally critical: providing CUT-level context improves oracle accuracy (see Guideline 02.K), combining functional code with explicit scenario lists improves test alignment (see Guideline 02.L), and including targeted snippets or error messages improves diagnostic precision (see Guideline 02.M). To prevent overload and token-related quality loss, complex objectives should be split into smaller prompt batches (see Guideline 02.O). For complex reasoning-heavy tasks, advanced prompting can be used with caution (see Guideline 02.F), and multimodal or graph context is valuable when structural understanding is needed, such as GUI or coverage-oriented analysis (see Guideline 02.D; see Guideline 02.E).
+This guideline is important because prompt structure directly influences whether generated tests are relevant, executable and consistent: defining role, context, instructions, constraints, and output format reduces ambiguity and aligns outputs with the intended testing artifact (see Guideline 02.K). Clear and specific task framing also reduces generic or off-target outputs (see Guideline 02.R). Starting with simple prompting improves robustness for compilable code generation (see Guideline 02.G), while few-shot examples should be added when output consistency or format control is required (see Guideline 02.B). Role assignment improves perspective and focus during testing tasks (see Guideline 02.C) and experimentation additionally shows it can improve organization and navigability by producing clearer category-based test structures (see Guideline 02.T). Separating stable system behavior from task-specific user requests supports more predictable responses across iterations (see Guideline 02.M). Context quality is equally critical: providing CUT-level context improves oracle accuracy (see Guideline 02.K), combining functional code with explicit scenario lists improves test alignment (see Guideline 02.L) and including targeted snippets or error messages improves diagnostic precision (see Guideline 02.M). To prevent overload and token-related quality loss, complex objectives should be split into smaller prompt batches (see Guideline 02.O). For complex reasoning-heavy tasks, advanced prompting can be used with caution (see Guideline 02.F) and multimodal or graph context is valuable when structural understanding is needed, such as GUI or coverage-oriented analysis (see Guideline 02.D; see Guideline 02.E).
 
 **Example:**  
 ```text
@@ -124,12 +117,12 @@ Output format:
 ```
 
 **When to Apply:**  
-- Test generation tasks where you already know the target behavior, framework and output format
-- Tasks where you want the generated result to be consistent and executable
-- Prompts that need clear structure, consistent formatting or a reusable template
-- Tasks where a few-shot example or a split into smaller prompt batches improves reliability
-- Debugging, repair, or bug-localization tasks where targeted error context improves precision
-- GUI or structurally complex testing tasks where multimodal or graph context adds real value
+- Test generation tasks where the target behavior, framework, and output format are already defined
+- Tasks that require consistent and executable results
+- Prompts that need a clear structure, stable formatting or a reusable template
+- Tasks where a few-shot example or smaller prompt batches improve reliability
+- Debugging, repair or bug-localization tasks where targeted error context improves precision
+- GUI or structurally complex testing tasks where multimodal or graph context adds clear value
 
 **When to Avoid:**  
 - Very small exploratory tasks where a short ad-hoc prompt is faster
