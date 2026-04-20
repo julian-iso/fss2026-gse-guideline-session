@@ -132,7 +132,7 @@ Output format:
 
 ---
 
-### Guideline 03: Validating Test Efficacy via AI Feedback Loops and Mutation tests
+### Guideline 03: Evaluate, Expand, and Integrate
 **Description:**
 Measures the effectiveness of LLM generated test suite by combining traditional metrics with LLM-in-the-Loop feedback and AI-assisted mutation testing. 
 
