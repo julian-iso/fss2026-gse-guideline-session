@@ -137,17 +137,16 @@ Output format:
 Measures the effectiveness of LLM generated test suite by combining traditional metrics with LLM-in-the-Loop feedback and AI-assisted mutation testing. 
 
 1. **Track core metrics:** Monitor code coverage, defect detection rate, execution time, and test flakiness to maintain a reliable and fast feedback loop.
-2.  Structure the test suite strategically by building a massive foundation of fast unit tests, a moderate middle layer of integration tests, and an absolute minimum of brittle end-to-end (E2E) tests.
-3. **LLM-in-the-Loop Feedback**: 
+2. **LLM-in-the-Loop Feedback**: 
     - Integrate hybrid testing systems that combine LLMs with State of the Art traditional testing tools (e.g., linters, compilers) before manual review to correct hallucinations or missing elements.
     - Feed test failures, execution errors, and validation data back to the LLM as follow-up prompts, enabling the model to iteratively self-correct and enhance its generated tests
     - To further ensure accuracy, triangulate results across multiple LLM tools for cross-validation. 
     - Finally, proactively prompt the model to audit the current suite (e.g., asking, "What am I not testing?") to identify missing edge cases, unverified requirements, and unhandled error conditions.
-4. **Generate High-Order Mutants:** Prompt the LLM to create complex, realistic test mutants by providing the focal method's code as context alongside few-shot examples of real-world bugs (adhering strictly to Guideline 2: Prompt Engineering).
-5. **Target Surviving Mutants:** Write new unit tests specifically targeting the "Not Covered" and "Not Injected" areas exposed by surviving mutants to increase test coverage
+3. **Generate High-Order Mutants:** Prompt the LLM to create complex, realistic test mutants by providing the focal method's code as context alongside few-shot examples of real-world bugs (adhering strictly to Guideline 2: Prompt Engineering).
+4. **Target Surviving Mutants:** Write new unit tests specifically targeting the "Not Covered" and "Not Injected" areas exposed by surviving mutants to increase test coverage
 
 **Reasoning:** 
-Tracking code coverage, defect detection rate, execution time, and test flakiness ensures the test suite remains a fast, trusted feedback loop (Guideline 3.L; Guideline 3.H; Guideline 3.J). Unit tests provide the best balance of value, they are fast, maintainable, and offer strong protection against regression. As you move up the pyramid, integration and E2E tests become slower, costlier, and harder to maintain due to complex dependencies (Guideline 3.O). Incorporating execution feedback through an "LLM-in-the-loop" approach actively addresses test correctness, reliability and test completeness by identifying and discarding invalid test cases, and iteratively fixing compilation problems and failures .LLMs are prone to hallucinations, which frequently result in unreliable or structurally flawed test code (Guideline 3.G; Guideline 3.S). Integrating models with reliable SOTA tools mitigates these issues, reinforcing test reliability, stability, and developer trust by ensuring complex testing scenarios are correctly validated (Guideline 3.E). Because LLMs are prone to genereating incorrect or logical inconsistent test data, cross-verifying outputs preserves the functional correctness and accuracy of the test suite (Guideline 3.H). Prompting LLMs to generate high-order mutants faults that closely mimic real-world defects. This provides a much stronger guarantee of test accuracy compared to traditional, first-order, rule-based mutations (Guideline 3D; Guideline 3.I; Guideline 3.U). Surviving mutants serve as highly actionable guides for developers to write targeted unit tests, directly eliminating test suite weaknesses (Guideline 3.C; Guideline 3.T). 
+Tracking code coverage, defect detection rate, execution time, and test flakiness ensures the test suite remains a fast, trusted feedback loop (Guideline 3.L; Guideline 3.H; Guideline 3.J). Unit tests provide the best balance of value, they are fast, maintainable, and offer strong protection against regression. Incorporating execution feedback through an "LLM-in-the-loop" approach actively addresses test correctness, reliability and test completeness by identifying and discarding invalid test cases, and iteratively fixing compilation problems and failures .LLMs are prone to hallucinations, which frequently result in unreliable or structurally flawed test code (Guideline 3.G; Guideline 3.S). Integrating models with reliable SOTA tools mitigates these issues, reinforcing test reliability, stability, and developer trust by ensuring complex testing scenarios are correctly validated (Guideline 3.E). Because LLMs are prone to genereating incorrect or logical inconsistent test data, cross-verifying outputs preserves the functional correctness and accuracy of the test suite (Guideline 3.H). Prompting LLMs to generate high-order mutants faults that closely mimic real-world defects. This provides a much stronger guarantee of test accuracy compared to traditional, first-order, rule-based mutations (Guideline 3D; Guideline 3.I; Guideline 3.U). Surviving mutants serve as highly actionable guides for developers to write targeted unit tests, directly eliminating test suite weaknesses (Guideline 3.C; Guideline 3.T). 
 
 **Example**:   
 **Context:** You are testing a Python function apply_discount(price, is_vip) that applies a 20% discount only if the price is over $100 and the user is a VIP. Your initial unit test only checks the "happy path" with a $150 price and a VIP user.
@@ -163,7 +162,7 @@ def apply_discount(price, is_vip):
 # The LLM is prompted to inject a complex fault. It alters the boundary, the logic gate, and the math.
 def apply_discount_mutant(price, is_vip):
     if price >= 100 or is_vip: # Mutated: > to >=, and 'and' to 'or'
-        return price * 0.9     # Mutated: 0.8 to 0.9
+        return price * 0.8      
     return price
 ```
 ```
@@ -244,7 +243,7 @@ test_generation:
 **Description:** Testers and developers must actively mediate both the inputs and outputs when using LLMs for software testing.
 1. Manually sanitize all prompts to remove confidential data 
 2. Treat all AI-generated testing artifacts (unit tests, automation scripts, and metamorphic relations) as preliminary drafts. Human testers must manually evaluate these drafts for functional accuracy, code maintainability, logic, and strict alignment with internal team coding standards before integration into a CI/CD pipeline
-3. Manually evaluate all AI-generated test cases and scripts for accuracy, readability, and alignment with team standards 
+
 
 **Reasoning:**  
 Prompts often require details from internal systems. Without human oversight to manually sanitize and filter sensitive data, organizations face severe confidentiality risks and potential data leakage to external APIs (Guideline 5.A). Generative AI frequently suffers from hallucinations, faulty logic, and inaccuracies. Blindly trusting AI-generated tests risks propagating false positives or false negatives, which undermines test reliability and stability (Guideline 5.B, Guideline 5.F; Guideline 5.R; Guideline 5.G). Tests should be easily readable to enhance maintainability and decrease errors (Guideline 5.G). LLM generated output can contain errors and needs thorough validation (Guideline 5.D)
