@@ -12,9 +12,9 @@
 
 ### General Evaluation Criteria
 
-* **Assertion Quality**: Do tests make precise assertions rather than vague checks (e.g., just asserting not null), complementing the coverage metrics tracked by tools like JaCoCo?
+* **Assertion Quality**: Do tests make precise assertions rather than vague checks (e.g., just asserting not null)?
 
-* **Requirement Coverage:** Do the tests cover every stated rule/requirement (including positive and negative paths)?
+* **Requirement Coverage:** Do the tests cover every stated rule/requirement, including positive and negative paths? (developers may also use tools like JaCoCo)
 
 * **Determinism & Reliability:** Are tests stable and repeatable (no flaky behavior, random outcomes, or hidden environment dependencies)?
 
