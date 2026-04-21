@@ -12,7 +12,7 @@
 ### Guideline 01: Define the Testing Objective
 
 **Description:**  
-Define the test target, scope boundaries and success criteria before writing prompts or tests. Use three concrete inputs:
+Define the test target, scope boundaries and success criteria prior to prompt design or code generation. Use three concrete inputs:
 
 1. **Identify the Testing Objective and Expected Artifact**  
     Clearly specify what testing goal you want to achieve (e.g., generating test cases for a specific feature, analyzing logs, or validating code behavior) and which artifact you expect as output (e.g., test file, test report, test data). Name the exact target function/module and when known the intended scenario set.
@@ -27,6 +27,7 @@ Define the test target, scope boundaries and success criteria before writing pro
 This guideline is foundational because a clearly defined testing objective prevents misalignment between stakeholder expectations and LLM outputs. Identifying the specific testing objective and expected artifact ensures the LLM understands context and generates relevant outputs (see Guideline 01.A). Analyzing software requirements to explicitly identify testing objectives, scope boundaries and success criteria establishes the foundational target required for the entire testing lifecycle (see Guideline 01.B). Creating a formal test plan that outlines the testing strategy and specific test objectives clarifies the target before test design, ensuring that subsequent test generation aligns with software goals (see Guideline 01.C). Grounding success criteria in structured project documentation-such as user stories, requirement documents, acceptance criteria and real-world examples-ensures the testing objective is concrete and verifiable (see Guideline 01.F; see Guideline 01.H). Establishing explicit scope boundaries by identifying edge cases, negative paths and boundary conditions prevents ambiguous or incomplete test coverage (see Guideline 01.G). LLM experimentation further shows that explicitly enumerating scenarios sharply reduces scope creep while increasing scenario completeness (see Guideline 01.I) and that security-focused checks in sensitive domains are only reliably generated when requested directly in the objective (see Guideline 01.J). It also demonstrates that embedding technical practices in the objective (e.g., parametrization and mocking) improves maintainability and reduces redundant tests (see Guideline 01.K). Employing mutation testing as a success criterion optimizes test evaluation-while code coverage is a useful metric, its correlation with actual bug detection is weak; mutation testing ensures tests fulfill the primary objective of detecting faults (see Guideline 01.D).
 
 **Example:**  
+> Note: This example represents a structured test specification. It is the conceptual input used to inform prompt engineering, not the final prompt text itself.
 ```
 Test Objective: Generate unit tests for the apply_discount(price, is_vip) function
 Expected Artifact: PyTest test file with parametrized tests
@@ -42,7 +43,7 @@ Edge Cases:
 ```
 
 **When to Apply:**  
-- Before any test generation or prompt engineering task
+- During the design phase, before any prompt execution or automated test code is generated
 - When defining the baseline for test suite evaluation
 - When multiple stakeholders are involved and clarity is needed
 - When mutation testing or coverage metrics will be used to validate output
