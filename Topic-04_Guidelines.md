@@ -9,6 +9,9 @@
 
 ## 1. Unified Guidelines
 
+### Scope & Applicability
+These guidelines are optimized for Unit Testing (the testing level) and Defect Testing (the testing type). They define how to leverage classic LLM chat interfaces and integrated AI agents to effectively identify defects within a software codebase.
+
 ### Guideline 01: Define the Testing Objective
 
 **Description:**  
