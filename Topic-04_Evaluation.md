@@ -12,7 +12,7 @@
 
 ### General Evaluation Criteria
 
-* **Assertion Quality**: Do tests make precise assertions about expected behavior (exact True/False or expected exception), instead of vague checks?
+* **Assertion Quality**: Do tests make precise assertions rather than vague checks (e.g., just asserting not null), complementing the coverage metrics tracked by tools like JaCoCo?
 
 * **Requirement Coverage:** Do the tests cover every stated rule/requirement (including positive and negative paths)?
 
